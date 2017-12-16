@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>簡易投票アプリ</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body class="container">
+        <h1>簡易投票アプリ</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>候補者</th>
+                        <th>投票数</th>
+                    </tr>
+                </thead>
+                <tbody id="report">
+                </tbody>
+            </table>
+        </div>
+        <label for="vote-as">Vote as</label>
+        <select id="vote-as" name="vote-as">
+        </select>
+        <label for="vote-as">Vote to</label>
+        <select id="vote-to" name="vote-to">
+        </select>
+
+        <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+
+        <section>
+
+        <section id="delegation">
+            <h2>Delegation</h2>
+            <label for="delegate-source">From</label>
+            <select id="delegate-source" name="delegate-source">
+            </select>
+            <label for="delegate-target">To</label>
+            <select id="delegate-target" name="delegate-target">
+            </select>
+            <a href="#" onclick="delegate()" class="btn btn-primary">Delegate</a>
+        </section>
+
+    </body>
+    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="./index.js"></script>
+</html>

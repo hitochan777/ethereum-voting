@@ -1,0 +1,16 @@
+{
+  "name": "ethereum-voting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hitochan777/ethereum-voting.git",
+  "author": "Otsuki Hitoshi <hitochan777@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ganache-cli": "^6.0.3",
+    "solc": "^0.4.19",
+    "web3": "^1.0.0-beta.26"
+  },
+  "scripts": {
+    "start": "ganache-cli --gasLimit 1000000000"
+  }
+}
