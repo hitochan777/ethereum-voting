@@ -8,7 +8,7 @@ const abi = JSON.parse(
 const BallotContract = web3.eth.contract(abi);
 
 const contractInstance = BallotContract.at(
-  '0x11e3c353414F7ad8602fE0afDf6f72360D98A80F',
+  '0xa751f8014ff6f54DcFf37861e86BAC02F1A8de17',
 );
 
 let candidates = [];

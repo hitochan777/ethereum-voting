@@ -9,7 +9,7 @@ const web3 = new Web3('http://localhost:8545');
 
 web3.eth.getAccounts().then(accs => {
   const accounts = accs;
-  const code = fs.readFileSync('Voting.sol').toString();
+  const code = fs.readFileSync('Ballot.sol').toString();
   const compiledCode = solc.compile(code);
   console.log(compiledCode.contracts[':Ballot'].interface);
   const abiDefinition = JSON.parse(compiledCode.contracts[':Ballot'].interface);
