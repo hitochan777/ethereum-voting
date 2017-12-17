@@ -1,18 +1,23 @@
 // @format
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
+// abiをパースする
 const abi = JSON.parse(
   '[{"constant":true,"inputs":[],"name":"getVoterLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"i","type":"uint32"}],"name":"getCandidate","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"chairperson","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidates","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"}],"name":"delegate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_voters","type":"address[]"}],"name":"giveRightToVote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"},{"name":"delegate","type":"address"},{"name":"vote","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"voterAddresses","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_bytes32","type":"bytes32"}],"name":"bytes32ToStr","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getCandidateLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]',
 );
 
 const BallotContract = web3.eth.contract(abi);
 
+// コントラクトのインスタンスを取得する
 const contractInstance = BallotContract.at(
   '0xa751f8014ff6f54DcFf37861e86BAC02F1A8de17',
 );
 
+// 候補者の名前を保持するリスト
 let candidates = [];
 
+// 選択ボックスで選択された投票者に投票をする
+// エラー処理はしてません (汗)
 function voteForCandidate() {
   const candidateName = $('#vote-to').val();
   console.log(candidateName);
@@ -23,6 +28,7 @@ function voteForCandidate() {
   });
 }
 
+// 投票権を委任する
 function delegate() {
   const delegateSource = $('#delegate-source').val();
   const delegateTarget = $('#delegate-target').val();
@@ -33,6 +39,7 @@ function delegate() {
   });
 }
 
+// 候補者のリストをブロックチェーンから取得して選択ボックスを初期化する
 $(document).ready(function() {
   const voterLen = Number(contractInstance.getVoterLength.call().toString());
   let addresses = [];
